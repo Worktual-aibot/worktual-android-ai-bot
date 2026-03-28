@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WorktualAIBot">
+        <attr name="worktual_webchatId" format="string" />
+        <attr name="worktual_primaryColor" format="color" />
+        <attr name="worktual_loadingBackground" format="color" />
+        <attr name="worktual_loadingTitle" format="string" />
+        <attr name="worktual_loadingSubtitle" format="string" />
+        <attr name="worktual_maxLoadTimeMs" format="integer" />
+    </declare-styleable>
+</resources>

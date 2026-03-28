@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="worktual_ai_bot_default_title">AI Assistant</string>
+    <string name="worktual_ai_bot_default_subtitle">Loading your chat\u2026</string>
+</resources>

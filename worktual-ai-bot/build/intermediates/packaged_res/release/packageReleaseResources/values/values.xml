@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="worktual_ai_bot_default_subtitle">Loading your chat\u2026</string>
+    <string name="worktual_ai_bot_default_title">AI Assistant</string>
+    <declare-styleable name="WorktualAIBot">
+        <attr format="string" name="worktual_webchatId"/>
+        <attr format="color" name="worktual_primaryColor"/>
+        <attr format="color" name="worktual_loadingBackground"/>
+        <attr format="string" name="worktual_loadingTitle"/>
+        <attr format="string" name="worktual_loadingSubtitle"/>
+        <attr format="integer" name="worktual_maxLoadTimeMs"/>
+    </declare-styleable>
+</resources>

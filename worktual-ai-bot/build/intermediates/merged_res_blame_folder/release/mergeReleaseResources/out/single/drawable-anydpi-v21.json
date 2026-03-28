@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.worktual.aibot.worktual-ai-bot-release-22:/drawable-anydpi-v21/ic_call_decline.xml",
+        "source": "com.worktual.aibot.worktual-ai-bot-core-1.13.1-10:/drawable-anydpi-v21/ic_call_decline.xml"
+    },
+    {
+        "merged": "com.worktual.aibot.worktual-ai-bot-release-22:/drawable-anydpi-v21/ic_call_answer_video_low.xml",
+        "source": "com.worktual.aibot.worktual-ai-bot-core-1.13.1-10:/drawable-anydpi-v21/ic_call_answer_video_low.xml"
+    },
+    {
+        "merged": "com.worktual.aibot.worktual-ai-bot-release-22:/drawable-anydpi-v21/ic_call_answer_video.xml",
+        "source": "com.worktual.aibot.worktual-ai-bot-core-1.13.1-10:/drawable-anydpi-v21/ic_call_answer_video.xml"
+    },
+    {
+        "merged": "com.worktual.aibot.worktual-ai-bot-release-22:/drawable-anydpi-v21/ic_call_answer.xml",
+        "source": "com.worktual.aibot.worktual-ai-bot-core-1.13.1-10:/drawable-anydpi-v21/ic_call_answer.xml"
+    },
+    {
+        "merged": "com.worktual.aibot.worktual-ai-bot-release-22:/drawable-anydpi-v21/ic_call_decline_low.xml",
+        "source": "com.worktual.aibot.worktual-ai-bot-core-1.13.1-10:/drawable-anydpi-v21/ic_call_decline_low.xml"
+    },
+    {
+        "merged": "com.worktual.aibot.worktual-ai-bot-release-22:/drawable-anydpi-v21/ic_call_answer_low.xml",
+        "source": "com.worktual.aibot.worktual-ai-bot-core-1.13.1-10:/drawable-anydpi-v21/ic_call_answer_low.xml"
+    }
+]
