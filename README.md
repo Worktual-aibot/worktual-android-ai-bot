@@ -1,6 +1,6 @@
 # Worktual AI Bot — Android SDK
 
-Drop-in AI chatbot for native Android apps. One line to launch.
+Drop-in AI chatbot for native Android apps. Preloads in background, opens instantly.
 
 ## Installation
 
@@ -20,47 +20,44 @@ Add the dependency in your app `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.github.user:worktual-android-ai-bot:1.0.0")
+    implementation("com.github.Worktual-aibot:worktual-android-ai-bot:1.0.0")
 }
 ```
 
-## Usage
+## Usage (Recommended — Instant Open)
 
-### Simple — Launch as Activity (one line)
-
-```kotlin
-WorktualAIBotActivity.launch(this, "YOUR_WEBCHAT_ID")
-```
-
-The bot opens full-screen and closes itself when the user is done.
-
-### Advanced — Embed as View
+Preload the bot hidden in your main Activity. When the user taps your button, the bot opens **instantly** — no loading screen.
 
 ```kotlin
-val bot = WorktualAIBot(
-    context = this,
-    config = WorktualAIBotConfig(webchatId = "YOUR_WEBCHAT_ID"),
-    listener = object : WorktualAIBotListener {
-        override fun onClose() {
-            finish()
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Preload bot in background (hidden, loads WebView silently)
+        WorktualAIBotManager.preload(this, "YOUR_WEBCHAT_ID")
+
+        // When user taps button — opens instantly!
+        findViewById<Button>(R.id.chatButton).setOnClickListener {
+            WorktualAIBotManager.show(listener = object : WorktualAIBotListener {
+                override fun onClose() {
+                    // Bot hides automatically, stays loaded for next open
+                }
+            })
         }
     }
-)
 
-// Add to any ViewGroup or set as content
-setContentView(bot)
+    override fun onDestroy() {
+        WorktualAIBotManager.destroy()
+        super.onDestroy()
+    }
+}
 ```
 
-### Instant Loading (Preload)
-
-Preload the bot in your `Application` or main Activity so it opens instantly:
+## Alternative — Launch as Activity (shows loading screen)
 
 ```kotlin
-// Early in app lifecycle
-val preloader = WorktualAIBotPreloader(this, "YOUR_WEBCHAT_ID")
-preloader.preload()
-
-// Later — bot opens from cache, near instant
 WorktualAIBotActivity.launch(this, "YOUR_WEBCHAT_ID")
 ```
 
@@ -74,6 +71,8 @@ val config = WorktualAIBotConfig(
     primaryColor = Color.parseColor("#FF6B00"),
     loadingBackground = Color.parseColor("#FFF8F0")
 )
+
+WorktualAIBotManager.preload(this, "", config = config)
 ```
 
 | Parameter | Type | Default | Description |
