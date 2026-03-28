@@ -1,6 +1,6 @@
 # Worktual AI Bot — Android SDK
 
-Drop-in AI chatbot for native Android apps. Preloads in background, opens instantly.
+Drop-in AI chatbot for native Android apps. Preloads in background, opens instantly — no loading screen.
 
 ## Installation
 
@@ -24,28 +24,21 @@ dependencies {
 }
 ```
 
-## Usage (Recommended — Instant Open)
+## Setup (2 Steps)
 
-Preload the bot hidden in your main Activity. When the user taps your button, the bot opens **instantly** — no loading screen.
+### Step 1 — Preload in MainActivity (runs once on app start)
 
 ```kotlin
+import com.worktual.aibot.WorktualAIBotManager
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Preload bot in background (hidden, loads WebView silently)
+        // Bot loads silently in background — user sees nothing
         WorktualAIBotManager.preload(this, "YOUR_WEBCHAT_ID")
-
-        // When user taps button — opens instantly!
-        findViewById<Button>(R.id.chatButton).setOnClickListener {
-            WorktualAIBotManager.show(listener = object : WorktualAIBotListener {
-                override fun onClose() {
-                    // Bot hides automatically, stays loaded for next open
-                }
-            })
-        }
     }
 
     override fun onDestroy() {
@@ -55,15 +48,46 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-## Alternative — Launch as Activity (shows loading screen)
+### Step 2 — Show/Hide on button tap
 
 ```kotlin
-WorktualAIBotActivity.launch(this, "YOUR_WEBCHAT_ID")
+// Opens INSTANTLY — no loading screen!
+chatButton.setOnClickListener {
+    WorktualAIBotManager.show()
+}
 ```
 
-## Configuration
+That's it. The bot closes itself automatically when the user taps the close button inside the chat.
+
+## How It Works
+
+1. `preload()` loads the bot WebView **hidden** in your Activity on app start
+2. By the time the user taps the chat button, the bot is **already fully loaded**
+3. `show()` just makes it visible — **instant, zero delay**
+4. When user closes the chat, the bot hides but **stays loaded** in memory
+5. Next `show()` is instant again — no re-downloading
+
+## Handle Close Events (Optional)
 
 ```kotlin
+WorktualAIBotManager.show(listener = object : WorktualAIBotListener {
+    override fun onClose() {
+        // Bot already hides automatically
+        // Add any custom logic here
+    }
+
+    override fun onReady() {
+        Log.d("Bot", "Bot is loaded and ready")
+    }
+})
+```
+
+## Custom Branding
+
+```kotlin
+import com.worktual.aibot.WorktualAIBotConfig
+import com.worktual.aibot.WorktualAIBotManager
+
 val config = WorktualAIBotConfig(
     webchatId = "YOUR_WEBCHAT_ID",
     loadingLogoResId = R.drawable.my_logo,
@@ -81,10 +105,8 @@ WorktualAIBotManager.preload(this, "", config = config)
 | `baseUrl` | `String` | Production URL | Custom URL if self-hosted |
 | `loadingLogoResId` | `Int?` | `null` (spinner) | Drawable resource for logo |
 | `loadingTitle` | `String` | `"AI Assistant"` | Loading screen title |
-| `loadingSubtitle` | `String` | `"Loading your chat..."` | Loading screen subtitle |
 | `primaryColor` | `Int` | `#575CFF` | Progress bar colour |
-| `loadingBackground` | `Int` | `#F8F9FB` | Loading screen background |
-| `maxLoadTimeMs` | `Long` | `6000` | Max wait before force-showing chat |
+| `loadingBackground` | `Int` | `#F8F9FB` | Background colour |
 
 ## Requirements
 
