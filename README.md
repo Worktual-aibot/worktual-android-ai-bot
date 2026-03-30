@@ -20,7 +20,7 @@ Add the dependency in your app `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.github.Worktual-aibot:worktual-android-ai-bot:1.0.0")
+    implementation("com.github.Worktual-aibot:worktual-android-ai-bot:1.0.1")
 }
 ```
 
