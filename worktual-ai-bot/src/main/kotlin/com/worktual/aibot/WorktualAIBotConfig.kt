@@ -15,6 +15,7 @@ import android.graphics.Color
  * @param primaryColor Colour for progress bar & spinner (default: #575CFF).
  * @param loadingBackground Loading screen background colour (default: #F8F9FB).
  * @param maxLoadTimeMs Max ms to wait before force-showing chat (default: 6000).
+ * @param statusBarColor Background colour behind the status bar area (default: #C62828 red matching bot header).
  */
 data class WorktualAIBotConfig(
     val webchatId: String,
@@ -26,7 +27,8 @@ data class WorktualAIBotConfig(
     val loadingSubtitle: String = "Loading your chat...",
     val primaryColor: Int = Color.parseColor("#575CFF"),
     val loadingBackground: Int = Color.parseColor("#F8F9FB"),
-    val maxLoadTimeMs: Long = 6000L
+    val maxLoadTimeMs: Long = 6000L,
+    val statusBarColor: Int = Color.parseColor("#C62828")
 ) {
     companion object {
         const val DEFAULT_BASE_URL =

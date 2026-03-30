@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.view.ViewCompat
 import org.json.JSONObject
 
 /**
@@ -111,6 +112,8 @@ object WorktualAIBotManager {
         }
 
         container?.visibility = View.VISIBLE
+        // Ensure window insets are applied so the bot sits below the status bar
+        bot?.let { ViewCompat.requestApplyInsets(it) }
         isShowing = true
     }
 

@@ -2,12 +2,16 @@ package com.worktual.aibot
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.view.WindowInsets
 import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.FrameLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.worktual.aibot.internal.BotWebViewClient
 import com.worktual.aibot.internal.LoadingOverlayView
 import org.json.JSONObject
@@ -41,6 +45,9 @@ class WorktualAIBot(
     private var loaderVisible = true
 
     init {
+        // Background colour fills the status bar area behind the notch/cutout
+        setBackgroundColor(config.statusBarColor)
+
         // 1. WebView (bottom layer)
         webView = createWebView(context)
         addView(webView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
@@ -48,6 +55,14 @@ class WorktualAIBot(
         // 2. Loading overlay (top layer)
         loadingOverlay = LoadingOverlayView(context, config)
         addView(loadingOverlay, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+
+        // 3. Push content below the status bar so the bot header & close
+        //    button are never hidden behind system bars.
+        ViewCompat.setOnApplyWindowInsetsListener(this) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, systemBars.top, 0, systemBars.bottom)
+            insets
+        }
 
         // Start loading
         loadingOverlay.startAnimations()
